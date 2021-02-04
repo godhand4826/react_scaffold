@@ -2,7 +2,6 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
 
@@ -55,17 +54,13 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'src/template.html' ,
+			template: 'src/template.html',
+			favicon: 'src/favicon.ico',
 			minify:{
 				collapseWhitespace:true,
 				removeComments:true,
 				removeRedundantAttributes:true,
 			}
-		}),
-		new CopyPlugin({
-			patterns:[
-				{from:'src/favicon.ico'}
-			]
 		}),
 		new MiniCssExtractPlugin(),
 		new AntdDayjsWebpackPlugin(),
