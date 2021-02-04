@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
 
 module.exports = {
 	mode: 'development',
@@ -34,14 +35,20 @@ module.exports = {
 	optimization: {
 		splitChunks: {
 			chunks: 'all',
-			// cacheGroups: {
-			// 	vendors: {
-			// 		chunks: 'all',
-			// 		test: /[\\/]node_modules[\\/]/,
-			// 		name: 'vendors',
-			// 		priority: -10,
-			// 	},
-			// }
+			cacheGroups:{
+				react: {
+					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+					name: 'react',
+					chunks: 'all',
+					priority: 1,
+				},
+				vendor:{
+					name:'vendor',
+					chunks:'all',
+					reuseExistingChunk: true,
+					priority:-20
+				}
+			}
 		},
 		minimize: true,
 		minimizer: [new TerserPlugin({ extractComments: false })]
@@ -61,6 +68,7 @@ module.exports = {
 			]
 		}),
 		new MiniCssExtractPlugin(),
+		new AntdDayjsWebpackPlugin(),
 		new CleanWebpackPlugin({ verbose: true })
 	]
 }
