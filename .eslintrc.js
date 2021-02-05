@@ -1,22 +1,40 @@
 module.exports = {
 	parser: '@babel/eslint-parser',
-	ignorePatterns:'dist/**',
+	ignorePatterns: 'dist/**',
+	env:{
+		es6:true,
+		node:true,
+		browser:true,
+	},
+	extends: [
+		'eslint:recommended',
+		'plugin:react/recommended',
+	],
+	settings:{
+		react:{
+			version:'detect',
+		},
+	},
 	rules: {
 		indent: [
 			'error',
-			'tab'
+			'tab',
 		],
 		'linebreak-style': [
 			'error',
-			'unix'
+			'unix',
 		],
 		quotes: [
 			'error',
-			'single'
+			'single',
 		],
 		semi: [
 			'error',
-			'never'
-		]
-	}
+			'never',
+		],
+		'comma-dangle':[
+			'error',
+			'always',
+		],
+	},
 }

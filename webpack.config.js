@@ -1,13 +1,13 @@
 const path = require('path')
-const {merge} = require('webpack-merge')
+const {merge,} = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin,} = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-let config = {
+const config = {
 	mode: 'production',
 	entry: {
 		index: './src/index.jsx',
@@ -23,25 +23,25 @@ let config = {
 			exclude: /node_modules/,
 			use: 'babel-loader',
 			resolve: {
-				extensions: ['.jsx']
+				extensions: ['.jsx',],
 			},
 		}, {
 			test: /\.(sc|sa|c)ss$/,
-			use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-		},{
-			test:/\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf)$/,
+			use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',],
+		}, {
+			test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf)$/,
 			type: 'asset',
-		}],
+		},],
 	},
 	optimization: {
 		splitChunks: {
 			chunks: 'all',
-			cacheGroups:{
-				component:{
-					test:/[\\/]src[\\/]component[\\/]/,
-					name:'component',
-					chunks:'all',
-					minSize:0
+			cacheGroups: {
+				component: {
+					test: /[\\/]src[\\/]component[\\/]/,
+					name: 'component',
+					chunks: 'all',
+					minSize: 0,
 				},
 				react: {
 					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
@@ -49,43 +49,43 @@ let config = {
 					chunks: 'all',
 					priority: 1,
 				},
-				vendor:{
-					name:'vendor',
-					chunks:'all',
+				vendor: {
+					name: 'vendor',
+					chunks: 'all',
 					reuseExistingChunk: true,
-					priority:-20
+					priority: -20,
 				},
-			}
+			},
 		},
 		minimize: true,
-		minimizer: [new TerserPlugin({ extractComments: false })]
+		minimizer: [new TerserPlugin({extractComments: false,}),],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/template.html',
 			favicon: 'src/favicon.ico',
-			minify:{
-				collapseWhitespace:true,
-				removeComments:true,
-				removeRedundantAttributes:true,
-			}
+			minify: {
+				collapseWhitespace: true,
+				removeComments: true,
+				removeRedundantAttributes: true,
+			},
 		}),
 		new MiniCssExtractPlugin(),
 		new AntdDayjsWebpackPlugin(),
-		new CleanWebpackPlugin({ verbose: true })
-	]
+		new CleanWebpackPlugin({verbose: true,}),
+	],
 }
 
 
 let patch = {}
-if (process.env.MODE ==='dev'){
+if (process.env.MODE ==='dev') {
 	patch = {
-		mode:'development',
-		devtool: 'inline-source-map'
+		mode: 'development',
+		devtool: 'inline-source-map',
 	}
-}else if(process.env.MODE==='analyze'){
-	patch =  {
-		plugins:[new BundleAnalyzerPlugin()]
+} else if (process.env.MODE==='analyze') {
+	patch = {
+		plugins: [new BundleAnalyzerPlugin(),],
 	}
 }
 
