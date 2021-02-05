@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build": "webpack",
+        "build": "webpack --progress",
         "serve": "env MODE=dev webpack serve --open",
         "watch": "env MODE=dev webpack watch",
         "analyze": "env MODE=analyze webpack",

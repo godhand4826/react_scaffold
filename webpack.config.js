@@ -63,7 +63,12 @@ const config = {
 			},
 		},
 		minimize: true,
-		minimizer: [new TerserPlugin({extractComments: false,}),],
+		minimizer: [
+			new TerserPlugin({
+				extractComments: false,
+				parallel:8,
+			}),
+		],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
