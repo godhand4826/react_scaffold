@@ -1,12 +1,14 @@
 const path = require('path')
+const {merge} = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-module.exports = {
-	mode: 'development',
+let config = {
+	mode: 'production',
 	entry: {
 		index: './src/index.jsx',
 	},
@@ -35,6 +37,12 @@ module.exports = {
 		splitChunks: {
 			chunks: 'all',
 			cacheGroups:{
+				component:{
+					test:/[\\/]src[\\/]component[\\/]/,
+					name:'component',
+					chunks:'all',
+					minSize:0
+				},
 				react: {
 					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
 					name: 'react',
@@ -46,7 +54,7 @@ module.exports = {
 					chunks:'all',
 					reuseExistingChunk: true,
 					priority:-20
-				}
+				},
 			}
 		},
 		minimize: true,
@@ -67,3 +75,18 @@ module.exports = {
 		new CleanWebpackPlugin({ verbose: true })
 	]
 }
+
+
+let patch = {}
+if (process.env.MODE ==='dev'){
+	patch = {
+		mode:'development',
+		devtool: 'inline-source-map'
+	}
+}else if(process.env.MODE==='analyze'){
+	patch =  {
+		plugins:[new BundleAnalyzerPlugin()]
+	}
+}
+
+module.exports = merge(config, patch)

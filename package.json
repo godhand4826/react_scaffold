@@ -5,8 +5,9 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack",
-        "serve": "webpack serve --open",
-        "watch": "webpack watch",
+        "serve": "env MODE=dev webpack serve --open",
+        "watch": "env MODE=dev webpack watch",
+        "analyze": "env MODE=analyze webpack",
         "lint": "eslint . --ext js,jsx --fix",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -30,8 +31,10 @@
         "sass-loader": "^10.1.1",
         "terser-webpack-plugin": "^5.1.1",
         "webpack": "^5.20.0",
+        "webpack-bundle-analyzer": "^4.4.0",
         "webpack-cli": "^4.5.0",
-        "webpack-dev-server": "^3.11.2"
+        "webpack-dev-server": "^3.11.2",
+        "webpack-merge": "^5.7.3"
     },
     "dependencies": {
         "antd": "^4.12.0",
