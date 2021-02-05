@@ -40,14 +40,19 @@ const config = {
 				component: {
 					test: /[\\/]src[\\/]component[\\/]/,
 					name: 'component',
-					chunks: 'all',
+					chunks: 'initial',
+					minSize: 0,
+				},
+				loadable: {
+					test: /[\\/]src[\\/]component[\\/]/,
+					name: 'loadable',
+					chunks: 'async',
 					minSize: 0,
 				},
 				react: {
 					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
 					name: 'react',
 					chunks: 'all',
-					priority: 1,
 				},
 				vendor: {
 					name: 'vendor',
