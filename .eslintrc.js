@@ -16,25 +16,11 @@ module.exports = {
 		},
 	},
 	rules: {
-		indent: [
-			'error',
-			'tab',
-		],
-		'linebreak-style': [
-			'error',
-			'unix',
-		],
-		quotes: [
-			'error',
-			'single',
-		],
-		semi: [
-			'error',
-			'never',
-		],
-		'comma-dangle':[
-			'error',
-			'always',
-		],
+		indent: [ 'error', 'tab' ],
+		'linebreak-style': [ 'error', 'unix' ],
+		quotes: [ 'error', 'single' ],
+		semi: [ 'error', 'never' ],
+		'comma-dangle':[ 'error', 'only-multiline' ],
+		'no-trailing-spaces': ['error'],
 	},
 }

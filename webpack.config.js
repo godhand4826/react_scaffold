@@ -1,7 +1,7 @@
 const path = require('path')
-const {merge,} = require('webpack-merge')
+const {merge} = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const {CleanWebpackPlugin,} = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
@@ -23,15 +23,15 @@ const config = {
 			exclude: /node_modules/,
 			use: 'babel-loader',
 			resolve: {
-				extensions: ['.jsx',],
+				extensions: ['.jsx'],
 			},
 		}, {
 			test: /\.(sc|sa|c)ss$/,
-			use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',],
+			use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 		}, {
 			test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf)$/,
 			type: 'asset',
-		},],
+		}],
 	},
 	optimization: {
 		splitChunks: {
@@ -82,7 +82,7 @@ const config = {
 		}),
 		new MiniCssExtractPlugin(),
 		new AntdDayjsWebpackPlugin(),
-		new CleanWebpackPlugin({verbose: true,}),
+		new CleanWebpackPlugin({verbose: true}),
 	],
 }
 
@@ -92,10 +92,15 @@ if (process.env.MODE ==='dev') {
 	patch = {
 		mode: 'development',
 		devtool: 'inline-source-map',
+		devServer: {
+			historyApiFallback: true,
+			contentBase: './',
+			hot: true,
+		},
 	}
 } else if (process.env.MODE==='analyze') {
 	patch = {
-		plugins: [new BundleAnalyzerPlugin(),],
+		plugins: [new BundleAnalyzerPlugin()],
 	}
 }
 

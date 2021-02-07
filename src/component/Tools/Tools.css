@@ -1,0 +1,16 @@
+.demo {
+    margin: 16px;
+}
+
+.demo-nav {
+    height: 30px;
+    margin-bottom: 16px;
+    line-height: 30px;
+    background: #f8f8f8;
+}
+
+.demo .demo-nav a {
+    color: #1890ff;
+    padding: 0 8px;
+    line-height: 30px;
+}
