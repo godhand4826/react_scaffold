@@ -7,10 +7,12 @@ import {
 } from 'react-router-dom'
 import { Badge, Breadcrumb  } from 'antd'
 import 'antd/dist/antd.min.css'
+import './Tools.css'
 import Base64 from './Transcode/Base64'
 import Url from './Transcode/URL'
 import Html from './Transcode/Html'
-import './Tools.css'
+import Json from './Transcode/Json'
+
 
 const breadcrumbNameMap = {
 	'/base64': 'Base64',
@@ -46,7 +48,7 @@ function Tools(){
 				<Route path="/base64" component={Base64}/>
 				<Route path="/url" component={Url}/>
 				<Route path="/html" component={Html}/>
-				<Route path="/json" component={()=><div>JSON Formatter</div>}/>
+				<Route path="/json" component={Json}/>
 			</Switch>
 		</div>
 	)
